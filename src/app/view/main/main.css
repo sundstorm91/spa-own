@@ -1,0 +1,6 @@
+.main {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(24, 131, 24);
+    border: 2px dotted white;
+}
