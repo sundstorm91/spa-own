@@ -33,9 +33,8 @@ export default class FooterView {
             callback: null,
         }
 
+        /* создаем инстанс  */
         const elementCreator = new CreateElement(footerParams)
-
-
         return elementCreator;
     }
 

@@ -34,7 +34,6 @@ export default class HeaderView {
         }
 
         const elementCreator = new CreateElement(footerParams)
-
         return elementCreator;
     }
 
