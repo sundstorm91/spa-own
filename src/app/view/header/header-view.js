@@ -1,6 +1,7 @@
+import CreateElement from '../../utils/create-element';
 import '../header/header.css'
 import View from '../view';
-import '../header/nav.css';
+
 
 
 const cssClasses = {
@@ -22,5 +23,20 @@ export default class HeaderView extends View {
             callback: null,
         }
         super(params)
+        this.configureView()
+    }
+
+
+
+    configureView () {
+        const paramsNav = {
+            tag: 'nav',
+            classNames: [cssClasses.NAV],
+            textContent: '',
+            callback: null,
+        }
+
+        const creatorNav = new CreateElement(paramsNav);
+        this.elementCreator.addInnerElement(creatorNav);
     }
 }

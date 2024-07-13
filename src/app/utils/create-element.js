@@ -47,6 +47,9 @@ export default class CreateElement {
         this.element.textContent = text
     }
 
+    addInnerElement(element) {
+        this.element.append(element.getElement())
+    }
       /**
        * Description placeholder
        * @param {Array} cssClasses

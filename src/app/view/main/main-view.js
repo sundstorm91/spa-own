@@ -5,7 +5,7 @@ const cssClasses = {
     MAIN: 'main'
 }
 
-//const TEXT = 'this footer create by using SPA'
+const TEXT = 'this IS MAIN-baby'
 
 export default class MainView extends View {
     /**
@@ -15,7 +15,7 @@ export default class MainView extends View {
         const params = {
             tag: 'main',
             classNames: [cssClasses.MAIN],
-            textContent: '',
+            textContent: TEXT,
             callback: null,
         }
         super(params)
