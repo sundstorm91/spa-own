@@ -5,7 +5,7 @@ const cssClasses = {
     MAIN: 'main'
 }
 
-const TEXT = 'this IS MAIN-baby'
+
 
 export default class MainView extends View {
     /**
@@ -15,9 +15,21 @@ export default class MainView extends View {
         const params = {
             tag: 'main',
             classNames: [cssClasses.MAIN],
-            textContent: TEXT,
+            textContent: '',
             callback: null,
         }
         super(params)
+    }
+
+    setContent (view) {
+        const element = view.getHTMLElement();
+        const currentElement = this.elementCreator.getElement();
+
+        while (currentElement.firstElementChild) {
+            currentElement.innerHTML = ''
+        }
+
+        this.elementCreator.addInnerElement(element)
+
     }
 }

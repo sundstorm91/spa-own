@@ -10,8 +10,9 @@ export default class App {
 
     createView () {
         const footerView = new FooterView();
-        const headerView = new HeaderView();
         const mainView = new MainView();
+        const headerView = new HeaderView(mainView);
+
 
         document.body.append(headerView.getHTMLElement(), mainView.getHTMLElement(), footerView.getHTMLElement())
     }

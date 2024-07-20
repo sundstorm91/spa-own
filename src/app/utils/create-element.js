@@ -48,7 +48,14 @@ export default class CreateElement {
     }
 
     addInnerElement(element) {
-        this.element.append(element.getElement())
+        if (element instanceof CreateElement) {
+            //console.log('if', element)
+            this.element.append(element.getElement())
+        } else {
+           // console.log('else', element)
+            this.element.append(element)
+        }
+
     }
       /**
        * Description placeholder
@@ -68,7 +75,6 @@ export default class CreateElement {
     */
     setCallback(callback) {
         if (typeof callback === 'function') {
-            console.log(callback)
             this.element.addEventListener('click', (event) => callback(event))
         }
     }
