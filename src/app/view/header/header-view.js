@@ -58,12 +58,12 @@ export default class HeaderView extends View {
         const pages = [
             {
                 name: namePage.INDEX,
-                callback: () => mainComponent.setContent(indexView)
+                callback: () => mainComponent.setContent(indexView),
             },
 
             {
                 name: namePage.PRODUCT,
-                callback: () => mainComponent.setContent(productView)
+                callback: () => mainComponent.setContent(productView),
             }
         ];
 
@@ -78,7 +78,6 @@ export default class HeaderView extends View {
                 linkElement.setSelected();
             }
         })
-
     }
 }
 

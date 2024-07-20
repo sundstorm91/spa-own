@@ -35,7 +35,7 @@ export default class CardView extends View {
         }
 
         const cardFieldCreator = new CreateElement(paramsField);
-        this.elementCreator.addInnerElement(cardFieldCreator);
+
             /* ! */
         const paramsButton = {
             tag: 'button',
@@ -46,6 +46,7 @@ export default class CardView extends View {
 
         const buttonCreator = new CreateElement(paramsButton);
         this.elementCreator.addInnerElement(buttonCreator);
+        this.elementCreator.addInnerElement(cardFieldCreator);
     }
 
 

@@ -17,6 +17,7 @@ export default class IndexView extends View {
             callback: null,
         }
         super(params)
+        this.configureView();
         /* this.firstField = '';
         this.secondField = ''; */
     }

@@ -20,7 +20,8 @@ export default class ProductView extends View {
                 callback: null,
             }
 
-            super(params)
+            super(params);
+            this.configureView();
         }
 
         configureView () {
