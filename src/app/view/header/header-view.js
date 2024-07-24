@@ -46,27 +46,16 @@ export default class HeaderView extends View {
             textContent: '',
             callback: null,
         }
-        console.log(mainComponent.getHTMLElement())
+
+
         /* чтобы внутрь элемента мы могли вставить nav -> необходимо будет воспользоваться
         методом addInnerElement */
         const creatorNav = new CreateElement(paramsNav);/* создаем инстанс класса createElement */
         this.elementCreator.addInnerElement(creatorNav);/* воспользуемся инстансом родительского класса View -> elementCreator и добавим ему элемент нав */
 
-        const indexView = new IndexView();
-        const productView = new ProductView();
+        const pages = this.getPages(mainComponent);
 
-        const pages = [
-            {
-                name: namePage.PRODUCT,
-                callback: () => mainComponent.setContent(productView),
-            },
-            {
-                name: namePage.INDEX,
-                callback: () => mainComponent.setContent(indexView),
-            },
-
-
-        ];
+        /* В переменную pages  представляет собой массив с двумя обьектами, название линка и коллбэк. При нажатии на который вызывается или правильно сказать рендится необходимая картинка */
 
         pages.forEach((page, index) => {
             const linkElement = new LinkView(page, this.linkElements)
@@ -80,6 +69,25 @@ export default class HeaderView extends View {
                 linkElement.setSelected();
             }
         })
+    }
+
+    getPages (mainComponent) {
+
+        const indexView = new IndexView();
+        const productView = new ProductView();
+
+        const pages = [
+            {
+                name: namePage.PRODUCT,
+                callback: () => mainComponent.setContent(productView),
+            },
+            {
+                name: namePage.INDEX,
+                callback: () => mainComponent.setContent(indexView),
+            },
+        ];
+
+        return pages;
     }
 }
 
