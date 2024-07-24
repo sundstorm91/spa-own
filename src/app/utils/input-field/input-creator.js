@@ -16,8 +16,9 @@ export default class InputCreateField extends CreateElement {
         this.setCallback(params.callback)
         this.inputElement = document.createElement('input');
         this.labelElement = document.createElement('label');
+
         this.setTextContent(params.textContent)
-        this.element.append(this.inputElement, this.labelElement)
+        this.element.append(this.labelElement,this.inputElement )
     }
 
     setTextContent(text = '') {

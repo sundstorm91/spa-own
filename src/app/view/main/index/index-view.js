@@ -3,7 +3,8 @@ import View from '../../view';
 import InputCreateField from '../../../utils/input-field/input-creator';
 
 const cssClasses = {
-    INDEX: 'index'
+    INDEX: 'index',
+    PROBA: 'proba',
 }
 const FIELD_TEXT_ONE = 'Поле для ввода данных 1';
 const FIELD_TEXT_TWO = 'Поле для ввода данных 2';
@@ -24,8 +25,6 @@ export default class IndexView extends View {
 
     configureView() {
         const inputFirst = {
-            tag: 'input',
-            classNames: [],
             textContent: FIELD_TEXT_ONE,
             callback: (event) => this.keyupHandler(event, 'firstInput'),
         }
@@ -36,8 +35,6 @@ export default class IndexView extends View {
         /* === */
 
         const inputTwo = {
-            tag: 'input',
-            classNames: [],
             textContent: FIELD_TEXT_TWO,
             callback: (event) => this.keyupHandler(event, 'secondInput'),
         }
@@ -47,6 +44,7 @@ export default class IndexView extends View {
     }
 
     keyupHandler (event, fieldname) {
+
         if (event.target instanceof HTMLInputElement) {
             this[fieldname] = event.target.value;
         }

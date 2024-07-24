@@ -26,7 +26,7 @@ export default class ProductView extends View {
 
         configureView () {
             cardsInfo.forEach((item) =>{
-                const cardView = new CardView (item);
+                const cardView = new CardView(item);
                 this.elementCreator.addInnerElement(cardView.getHTMLElement())
             })
         }

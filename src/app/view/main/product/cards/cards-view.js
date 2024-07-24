@@ -17,12 +17,12 @@ export default class CardView extends View {
     * @type {import('../../utils/element-creator').ElementParams}
     * */
         const params = {
-            tag: 'section',
+            tag: 'div',
             classNames: [cssClasses.CONTAINER],
             textContent: '',
             callback: null,
         }
-        super(params)
+        super(params);
         this.configureView(card);
     }
 
@@ -45,8 +45,9 @@ export default class CardView extends View {
         }
 
         const buttonCreator = new CreateElement(paramsButton);
-        this.elementCreator.addInnerElement(buttonCreator);
+
         this.elementCreator.addInnerElement(cardFieldCreator);
+        this.elementCreator.addInnerElement(buttonCreator);
     }
 
 

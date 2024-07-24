@@ -20,6 +20,7 @@ export default class LinkView extends View {
         }
 
         super(params);
+
         this.linkElements = linkElements;
         this.configureView();
     }

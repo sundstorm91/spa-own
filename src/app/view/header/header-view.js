@@ -46,7 +46,7 @@ export default class HeaderView extends View {
             textContent: '',
             callback: null,
         }
-
+        console.log(mainComponent.getHTMLElement())
         /* чтобы внутрь элемента мы могли вставить nav -> необходимо будет воспользоваться
         методом addInnerElement */
         const creatorNav = new CreateElement(paramsNav);/* создаем инстанс класса createElement */
@@ -57,18 +57,20 @@ export default class HeaderView extends View {
 
         const pages = [
             {
+                name: namePage.PRODUCT,
+                callback: () => mainComponent.setContent(productView),
+            },
+            {
                 name: namePage.INDEX,
                 callback: () => mainComponent.setContent(indexView),
             },
 
-            {
-                name: namePage.PRODUCT,
-                callback: () => mainComponent.setContent(productView),
-            }
+
         ];
 
         pages.forEach((page, index) => {
             const linkElement = new LinkView(page, this.linkElements)
+
 
             creatorNav.addInnerElement(linkElement.getHTMLElement())
             this.linkElements.push(linkElement)

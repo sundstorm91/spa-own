@@ -22,6 +22,7 @@ export default class MainView extends View {
     }
 
     setContent (view) {
+
         const element = view.getHTMLElement();
         const currentElement = this.elementCreator.getElement();
 
