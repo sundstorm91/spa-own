@@ -1,6 +1,9 @@
 import '../link/link.css';
 import View from '../../view';
 
+
+
+
 const cssClasses = {
     ITEM: 'nav-item',
     ITEM_SELECTED: 'nav-item__selected'
@@ -8,9 +11,14 @@ const cssClasses = {
 
 
 export default class LinkView extends View {
+/**
+ * Description placeholder
+ * @param {import('../header-view').Page} pageParams
+ * @param {Map<LinkView>} linkElements
+ */
     constructor (pageParams, linkElements) {
         /**
-    * @type {import('../../utils/element-creator').ElementParams}
+    * @type {import('../../view').ViewParams}
     * */
         const params = {
             tag: 'a',

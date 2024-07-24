@@ -4,7 +4,7 @@ import View from '../view';
 import LinkView from './link/link-view';
 import IndexView from '../main/index/index-view';
 import ProductView from '../main/product/product-view';
-
+import { Pages } from '../../router/pages';
 
 const namePage = {
     INDEX: 'Главная',
@@ -18,11 +18,14 @@ const cssClasses = {
     NAV: 'nav',
 }
 
-//const TEXT = 'this footer create by using SPA'
-
 export default class HeaderView extends View {
 
-    constructor (mainComponent) {
+     /**
+      * Description placeholder
+      *
+      * @param {import('../../router/router').default} router
+      */
+    constructor (router) {
     /**
     * @type {import('../../utils/element-creator').ElementParams}
     * */
@@ -32,14 +35,20 @@ export default class HeaderView extends View {
             textContent: '',
             callback: null,
         }
-        super(params)
-        this.linkElements = [];
-        this.configureView(mainComponent) /* вызов метода для создания nav */
+        super(params);
+
+        this.headerLinkElements = new Map();
+
+        this.configureView(router);
     }
 
+    /**
+      * Description placeholder
+      *
+      * @param {import('../../router/router').default} router
+      */
 
-        /* создание метода для создания nav */
-    configureView (mainComponent) {
+    configureView (router) {
         const paramsNav = {
             tag: 'nav',
             classNames: [cssClasses.NAV],
@@ -47,47 +56,32 @@ export default class HeaderView extends View {
             callback: null,
         }
 
+        const creatorNav = new CreateElement(paramsNav);
+        this.elementCreator.addInnerElement(creatorNav);
 
-        /* чтобы внутрь элемента мы могли вставить nav -> необходимо будет воспользоваться
-        методом addInnerElement */
-        const creatorNav = new CreateElement(paramsNav);/* создаем инстанс класса createElement */
-        this.elementCreator.addInnerElement(creatorNav);/* воспользуемся инстансом родительского класса View -> elementCreator и добавим ему элемент нав */
-
-        const pages = this.getPages(mainComponent);
-
-        /* В переменную pages  представляет собой массив с двумя обьектами, название линка и коллбэк. При нажатии на который вызывается или правильно сказать рендится необходимая картинка */
-
-        pages.forEach((page, index) => {
-            const linkElement = new LinkView(page, this.linkElements)
-
-
-            creatorNav.addInnerElement(linkElement.getHTMLElement())
-            this.linkElements.push(linkElement)
-
-            if (index === START_PAGE_INDEX) {
-                page.callback();
-                linkElement.setSelected();
+        Object.keys(namePage).forEach((key) => {
+            const linkParams = {
+                name: namePage[key],
+                callback: () => router.navigate(Pages[key])
             }
+
+            const linkElement = new LinkView(linkParams, this.headerLinkElements);
+            creatorNav.addInnerElement(linkElement.getHTMLElement());
+            this.headerLinkElements.set(Pages[key], linkElement);
         })
     }
 
-    getPages (mainComponent) {
+     /**
+      * Description placeholder
+      * @param {string} namePage
+      */
 
-        const indexView = new IndexView();
-        const productView = new ProductView();
+    setSelectedItem(namePage) {
+        const linkComponent = this.headerLinkElements.get(namePage);
 
-        const pages = [
-            {
-                name: namePage.PRODUCT,
-                callback: () => mainComponent.setContent(productView),
-            },
-            {
-                name: namePage.INDEX,
-                callback: () => mainComponent.setContent(indexView),
-            },
-        ];
-
-        return pages;
+        if (linkComponent instanceof LinkView) {
+            linkComponent.setSelected();
+        }
     }
 }
 
