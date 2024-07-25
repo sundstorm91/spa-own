@@ -9,7 +9,7 @@ const cssClasses = {
 
 
 export default class ProductView extends View {
-    constructor () {
+    constructor (id='') {
         /**
         * @type {import('../../utils/element-creator').ElementParams}
         * */

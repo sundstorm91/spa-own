@@ -5,6 +5,7 @@ const CssClasses = {
     ERROR: 'not-found',
 };
 
+const TEXT_NOT_FOUND = 'ОШИБКА. Страница не найдена';
 
 export default class NotFoundView extends View {
     constructor() {
@@ -20,6 +21,6 @@ export default class NotFoundView extends View {
     }
 
     configureView() {
-        this.viewElementCreator.setTextContent(TEXT_NOT_FOUND);
+        this.elementCreator.setTextContent(TEXT_NOT_FOUND);
     }
 }

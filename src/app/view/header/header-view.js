@@ -60,6 +60,8 @@ export default class HeaderView extends View {
         this.elementCreator.addInnerElement(creatorNav);
 
         Object.keys(namePage).forEach((key) => {
+            console.log(namePage[key])
+            console.log(router)
             const linkParams = {
                 name: namePage[key],
                 callback: () => router.navigate(Pages[key])
@@ -78,7 +80,8 @@ export default class HeaderView extends View {
 
     setSelectedItem(namePage) {
         const linkComponent = this.headerLinkElements.get(namePage);
-
+/* принцип метода, если ты нажимаешь не по ссылке, а просто вводиш адрес строки минуально - нативно ничего происходить не будет, нужно хедеру внести логику чтобы при вводе адресной строки срабатывала
+логика ссылки */
         if (linkComponent instanceof LinkView) {
             linkComponent.setSelected();
         }
