@@ -2,8 +2,11 @@ import '../cards/cards.css';
 import View from '../../../view';
 import cardsInfo from '../../../../../data/cards';
 import CreateElement from '../../../../utils/create-element';
+import { Pages } from '../../../../router/pages';
 
-const cssClasses = {
+
+
+const CssClasses = {    /* Css! */
     CONTAINER: 'card',
     FIELD: 'card__field',
     BUTTON: 'card__button',
@@ -12,43 +15,58 @@ const cssClasses = {
 const CARD_TEXT_MORE = 'Подробнее..';
 
 export default class CardView extends View {
-     constructor (card) {
     /**
-    * @type {import('../../utils/element-creator').ElementParams}
-    * */
+     * @param {import('../../../../../data/cards').CardInfo} card
+     * @param {import('../../../../router/router').default} router
+     */
+    constructor(card, router) {
+        /**
+         * @type {import('../../../view').ViewParams}
+         */
         const params = {
-            tag: 'div',
-            classNames: [cssClasses.CONTAINER],
-            textContent: '',
-            callback: null,
-        }
+            tag: 'article',
+            classNames: [CssClasses.CONTAINER],
+        };
         super(params);
-        this.configureView(card);
+
+        this.card = card;
+        this.router = router;
+
+        this.htmlElement = this.configureView();
     }
 
-    configureView (card) {
-        const paramsField = {
-            tag: 'div',
-            classNames: [cssClasses.FIELD],
-            textContent: card.name,
+    configureView() {
+        /**
+         * @type {import('../../../../utils/create-element').ElementParams}
+         */
+        let labelParams = {
+            tag: 'label',
+            classNames: [CssClasses.FIELD],
+            textContent: this.card.name,
             callback: null,
-        }
+        };
+        const creatorLabel = new CreateElement(labelParams);
+        this.elementCreator.addInnerElement(creatorLabel);
 
-        const cardFieldCreator = new CreateElement(paramsField);
-
-            /* ! */
-        const paramsButton = {
+        labelParams = {
             tag: 'button',
-            classNames: [cssClasses.BUTTON],
+            classNames: [CssClasses.BUTTON],
             textContent: CARD_TEXT_MORE,
-            callback: null,
-        }
-
-        const buttonCreator = new CreateElement(paramsButton);
-
-        this.elementCreator.addInnerElement(cardFieldCreator);
-        this.elementCreator.addInnerElement(buttonCreator);
+            callback: this.buttonClickHandler.bind(this, `${Pages.PRODUCT}/${this.card.id}`),
+        };
+        const creatorButton = new CreateElement(labelParams);
+        this.elementCreator.addInnerElement(creatorButton);
     }
 
+    /**
+     * @param {string} path
+     */
+     buttonClickHandler(path) {
+        console.log(path,'+===+')
+        this.router.navigate(path);
+    }
 
+    /* buttonClickHandler () {
+        this.router.navigate(`${Pages.PRODUCT}/${this.card.id}`);
+    } */
 }

@@ -14,7 +14,7 @@ export default class NotFoundView extends View {
          */
         const params = {
             tag: 'section',
-            classNames: [CssClasses.ERROR],
+            classNames: [CssClasses.ERROR],/* textContent внутрь парамс????? */
         };
         super(params);
         this.configureView();

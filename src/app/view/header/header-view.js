@@ -27,7 +27,7 @@ export default class HeaderView extends View {
       */
     constructor (router) {
     /**
-    * @type {import('../../utils/element-creator').ElementParams}
+    * @type {import('../../utils/create-element').ElementParams}
     * */
         const params = {
             tag: 'header',
@@ -60,16 +60,21 @@ export default class HeaderView extends View {
         this.elementCreator.addInnerElement(creatorNav);
 
         Object.keys(namePage).forEach((key) => {
+            /* console.log(key)
             console.log(namePage[key])
-            console.log(router)
+            console.log(Pages[key]) */
             const linkParams = {
                 name: namePage[key],
                 callback: () => router.navigate(Pages[key])
             }
 
+
             const linkElement = new LinkView(linkParams, this.headerLinkElements);
-            creatorNav.addInnerElement(linkElement.getHTMLElement());
+
             this.headerLinkElements.set(Pages[key], linkElement);
+            creatorNav.addInnerElement(linkElement.getHTMLElement());
+            /* this.headerLinkElements.set(Pages[key], linkElement); !*/
+
         })
     }
 
@@ -79,12 +84,16 @@ export default class HeaderView extends View {
       */
 
     setSelectedItem(namePage) {
+
         const linkComponent = this.headerLinkElements.get(namePage);
-/* принцип метода, если ты нажимаешь не по ссылке, а просто вводиш адрес строки минуально - нативно ничего происходить не будет, нужно хедеру внести логику чтобы при вводе адресной строки срабатывала
-логика ссылки */
+        /* console.log(namePage)
+        console.log(this.headerLinkElements) */
         if (linkComponent instanceof LinkView) {
             linkComponent.setSelected();
         }
+
+        /* принцип метода, если ты нажимаешь не по ссылке, а просто вводиш адрес строки минуально - нативно ничего происходить не будет, нужно хедеру внести логику чтобы при вводе адресной строки срабатывала
+        логика ссылки */
     }
 }
 

@@ -2,6 +2,7 @@ import '../product/product.css';
 import View from '../../view';
 import cardsInfo from '../../../../data/cards';
 import CardView from './cards/cards-view';
+import CardDetailView from './card-detail/card-detail-view';
 
 const cssClasses = {
     PRODUCT: 'product',
@@ -9,25 +10,52 @@ const cssClasses = {
 
 
 export default class ProductView extends View {
-    constructor (id='') {
+    /**
+     * @param {string} id
+     * @param {import('../../../router/router').default} router
+     */
+    constructor (router, id) {
         /**
-        * @type {import('../../utils/element-creator').ElementParams}
+        * @type {import('../../../utils/create-element').ElementParams}
         * */
             const params = {
                 tag: 'section',
                 classNames: [cssClasses.PRODUCT],
-                textContent: '',
-                callback: null,
+
             }
 
             super(params);
-            this.configureView();
+
+            if (id) {
+                this.showLargeCard(router, id)
+            } else {
+                this.showAllCard(router);
+            }
         }
 
-        configureView () {
-            cardsInfo.forEach((item) =>{
-                const cardView = new CardView(item);
-                this.elementCreator.addInnerElement(cardView.getHTMLElement())
+
+    /**
+     * @param {import('../../../router/router').default} router
+     */
+        showAllCard (router) {
+            cardsInfo.forEach((card) => {
+                const smallCardComponent = new CardView(card, router);
+                this.elementCreator.addInnerElement(smallCardComponent.getHTMLElement());
             })
         }
+
+
+        /**
+         * @param {import('../../../router/router').default} router
+         * @param {string} id
+         */
+        showLargeCard (router, id) {
+            const selectedCard = cardsInfo.find((card) => card.id === id);
+            const largeCardComponent = new CardDetailView(selectedCard, router);
+            this.elementCreator.addInnerElement(largeCardComponent.getHTMLElement());
+        }
+
+
+
+
 }

@@ -33,7 +33,7 @@ export default class App {
       *
       * @returns {Array<import('./router/router').Route>}
       */
-     createRoutes () {/* 1:17 */
+     createRoutes () {/*1: 39*/
         return [
             {
                 path: '',
@@ -44,21 +44,23 @@ export default class App {
             {
                 path: `${Pages.INDEX}`,
                 callback: () => {
-                    //console.log('456')
+                    console.log('456')
                     this.setContentApp(Pages.INDEX, new IndexView());
                 },
             },
             {
                 path: `${Pages.PRODUCT}`,
                 callback: () => {
-                    //console.log('123')
-                    this.setContentApp(Pages.PRODUCT, new ProductView());
+                    console.log('123')
+
+                    this.setContentApp(Pages.PRODUCT, new ProductView(this.router, ''));
                 },
             },
             {
                 path: `${Pages.PRODUCT}/${ID_SELECTOR}`,
                 callback: (id) => {/* ! */
-                    this.setContentApp(Pages.PRODUCT, new ProductView(id));
+                    console.log('9')
+                    this.setContentApp(Pages.PRODUCT, new ProductView(this.router, id));
                 },
             },
             {
