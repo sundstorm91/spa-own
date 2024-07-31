@@ -43,7 +43,7 @@ export default class CardView extends View {
             tag: 'label',
             classNames: [CssClasses.FIELD],
             textContent: this.card.name,
-            callback: null,
+            callback: this.elementCreator.getElement().style.border = `2px solid red`,
         };
         const creatorLabel = new CreateElement(labelParams);
         this.elementCreator.addInnerElement(creatorLabel);
@@ -56,17 +56,15 @@ export default class CardView extends View {
         };
         const creatorButton = new CreateElement(labelParams);
         this.elementCreator.addInnerElement(creatorButton);
+
     }
 
     /**
      * @param {string} path
      */
      buttonClickHandler(path) {
-        console.log(path,'+===+')
+        console.log(`${Pages.PRODUCT}/${this.card.id}`, '<-')
         this.router.navigate(path);
     }
 
-    /* buttonClickHandler () {
-        this.router.navigate(`${Pages.PRODUCT}/${this.card.id}`);
-    } */
 }

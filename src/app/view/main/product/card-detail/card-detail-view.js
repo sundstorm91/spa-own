@@ -11,7 +11,9 @@ const CssClasses = {
 const CARD_TEXT_BACK = 'Назад...';
 
 export default class CardDetailView extends CardView {
+
     configureView() {
+
         this.elementCreator.setCssClasses([CssClasses.CONTAINER, CssClasses.CONTAINER_FULL]);
 
         /**
@@ -20,7 +22,7 @@ export default class CardDetailView extends CardView {
         let labelParams = {
             tag: 'label',
             classNames: [CssClasses.FIELD],
-            textContent: this.card.name,/* this.card.name */
+            textContent: this.card.name, /* this.card.name */
             callback: null,
         };
         let creatorLabel = new ElementCreator(labelParams);

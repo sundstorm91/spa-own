@@ -21,7 +21,6 @@ export default class ProductView extends View {
             const params = {
                 tag: 'section',
                 classNames: [cssClasses.PRODUCT],
-
             }
 
             super(params);

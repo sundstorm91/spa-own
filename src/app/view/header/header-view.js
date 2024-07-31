@@ -60,9 +60,7 @@ export default class HeaderView extends View {
         this.elementCreator.addInnerElement(creatorNav);
 
         Object.keys(namePage).forEach((key) => {
-            /* console.log(key)
-            console.log(namePage[key])
-            console.log(Pages[key]) */
+
             const linkParams = {
                 name: namePage[key],
                 callback: () => router.navigate(Pages[key])
@@ -73,7 +71,9 @@ export default class HeaderView extends View {
 
             this.headerLinkElements.set(Pages[key], linkElement);
             creatorNav.addInnerElement(linkElement.getHTMLElement());
+
             /* this.headerLinkElements.set(Pages[key], linkElement); !*/
+
 
         })
     }
@@ -86,8 +86,8 @@ export default class HeaderView extends View {
     setSelectedItem(namePage) {
 
         const linkComponent = this.headerLinkElements.get(namePage);
-        /* console.log(namePage)
-        console.log(this.headerLinkElements) */
+        console.log(namePage)
+        console.log(this.headerLinkElements)
         if (linkComponent instanceof LinkView) {
             linkComponent.setSelected();
         }

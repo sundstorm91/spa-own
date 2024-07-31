@@ -7,13 +7,17 @@ import { ID_SELECTOR, Pages } from "./router/pages";
 import IndexView from "./view/main/index/index-view";
 import ProductView from "./view/main/product/product-view";
 import NotFoundView from "./view/main/not-found/not-found-view";
+import State from "./state/state";
 
+
+/* класс инициализации приложения  */
 export default class App {
     constructor () {
         this.header = null;
         this.main = null;
-        //this.footer = null;
-        const routes = this.createRoutes();
+
+        const state = new State();
+        const routes = this.createRoutes(state);
         this.router = new Router(routes);
         this.createView();
     }
@@ -30,28 +34,28 @@ export default class App {
 
      /**
       * Description placeholder
-      *
+      * @param {import('./state/state').default} state
       * @returns {Array<import('./router/router').Route>}
       */
-     createRoutes () {/*1: 39*/
+     createRoutes (state) { /*1: 39*/
         return [
             {
                 path: '',
                 callback: () => {
-                    this.setContentApp(Pages.INDEX, new IndexView());
+                    this.setContentApp(Pages.INDEX, new IndexView(state));
                 },
             },
             {
                 path: `${Pages.INDEX}`,
                 callback: () => {
                     console.log('456')
-                    this.setContentApp(Pages.INDEX, new IndexView());
+                    this.setContentApp(Pages.INDEX, new IndexView(state));
                 },
             },
             {
                 path: `${Pages.PRODUCT}`,
                 callback: () => {
-                    console.log('123')
+                    console.log('1')
 
                     this.setContentApp(Pages.PRODUCT, new ProductView(this.router, ''));
                 },
@@ -59,7 +63,7 @@ export default class App {
             {
                 path: `${Pages.PRODUCT}/${ID_SELECTOR}`,
                 callback: (id) => {/* ! */
-                    console.log('9')
+                    console.log('2')
                     this.setContentApp(Pages.PRODUCT, new ProductView(this.router, id));
                 },
             },
@@ -77,7 +81,6 @@ export default class App {
      * @param {import('./view/view').default} view
      */
     setContentApp (pageName, view) {
-
         this.header.setSelectedItem(pageName);
         this.main.setContent(view);
     }

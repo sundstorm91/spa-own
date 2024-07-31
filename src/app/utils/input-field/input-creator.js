@@ -9,8 +9,13 @@ const cssClasses = {
 export default class InputCreateField extends CreateElement {
 
     createElement(params) {
+        console.log(params.textContent)
         this.element = document.createElement('div');
         this.element.classList.add(cssClasses.FIELD_CONTAINER);
+
+        /* params.classNames.forEach((name) => {
+            this.element.classList.add(name)
+        }) */
 
         /* ! */
         this.setCallback(params.callback)
@@ -18,7 +23,11 @@ export default class InputCreateField extends CreateElement {
         this.labelElement = document.createElement('label');
 
         this.setTextContent(params.textContent)
-        this.element.append(this.labelElement,this.inputElement )
+        this.element.append(this.labelElement,this.inputElement)
+    }
+
+    setValue(value) {
+        this.inputElement.value = value;
     }
 
     setTextContent(text = '') {

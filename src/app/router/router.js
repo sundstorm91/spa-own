@@ -3,6 +3,16 @@ import { ID_SELECTOR } from "./pages";
 export default class Router {/* 1:14 */
     constructor (routes) {
         this.routes = routes;
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const path = this.getCurrentPath();
+          this.navigate(path);
+        /* в процессе загрузки приложение, может загрузиться не все что нужно, и поэтому мы дублируем логику  */
+        })
+
+
+        window.addEventListener('popstate', this.browserChangeHandler.bind(this));
+        window.addEventListener('hashchange', this.browserChangeHandler.bind(this));
     }
 
      /**
@@ -10,11 +20,10 @@ export default class Router {/* 1:14 */
       * @param {string} url
       */
     navigate(url) {
-      console.log(url, '<= url')
+
       const request = this.parseUrl(url);
 
       const pathForFind = request.resource === '' ? request.path : `${request.path}/${ID_SELECTOR}`;
-      console.log(pathForFind)
       const route = this.routes.find((item) => item.path === pathForFind);
 
 
@@ -39,7 +48,7 @@ export default class Router {/* 1:14 */
 
 
       [result.path = '', result.resource = ''] = path;
-      console.log(result,'++')
+
 
       return result;
         /* логика создания полей!????? */
@@ -48,8 +57,20 @@ export default class Router {/* 1:14 */
     redirectToNotFound() {
 
       const routeNotFound = this.routes.find((item) => item.path === Pages.NOT_FOUND);
-      if (routeNotFound) {/* ???? */
+      if (routeNotFound) {      /* ???? */
          this.navigate(routeNotFound.path)
       }
+    }
+
+    browserChangeHandler () {
+      const path = this.getCurrentPath();
+      this.navigate(path);
+    }
+
+    getCurrentPath () {
+      if (window.location.hash) {
+        return window.location.hash.slice(1)
+      }
+      return window.location.pathname.slice(1)
     }
 }

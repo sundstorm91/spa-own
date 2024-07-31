@@ -5,8 +5,6 @@ const cssClasses = {
     MAIN: 'main'
 }
 
-
-
 export default class MainView extends View {
     /**
     * @type {import('../../utils/element-creator').ElementParams}
