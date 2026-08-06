@@ -1,4 +1,4 @@
-import { ID_SELECTOR } from "./pages";
+import { ID_SELECTOR, Pages } from "./pages";
 
 export default class Router {/* 1:14 */
     constructor (routes) {
