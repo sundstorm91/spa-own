@@ -2,6 +2,7 @@ const path = require('path');
 const htmlWebPackPlugin = require ('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+
 module.exports = {
     entry: './src/app.js',
     output: {
@@ -82,5 +83,6 @@ module.exports = {
         open: true,
         compress: true,
         port: 3000,
+        historyApiFallback: true, /* для spa! */
     }
 }
